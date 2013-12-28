@@ -60,7 +60,7 @@ public class CellGraphic {
 			break;
 		}
 
-		mPaint.setStyle(Paint.Style.FILL);
+		mPaint.setStyle(Paint.Style.STROKE);
 	}
 
 	/**
@@ -70,5 +70,6 @@ public class CellGraphic {
 	 */
 	public void Render(Canvas canvas) {
 		canvas.drawCircle(mPosition.x, mPosition.y, mRadius, mPaint);
+		canvas.drawText(mCell.getHIndex()+"-"+mCell.getIIndex(), mPosition.x, mPosition.y, mPaint);
 	}
 }
