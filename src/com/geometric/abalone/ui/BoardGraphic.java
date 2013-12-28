@@ -46,11 +46,11 @@ public class BoardGraphic {
 
 			float cellHeight = 9 * cellRadius * 2;
 
-			float cellPosY = ((height - cellHeight) / 2) + cellHeight
-					- (hIndex * cellRadius) - (cellRadius / 2);
+			// float cellPosY = ((height - cellHeight) / 2) + cellHeight
+			// - (hIndex * cellRadius * 2) - cellRadius;
 
-//			float cellPosY = cellHeight - (hIndex * cellRadius * 2)
-//					- cellRadius;
+			float cellPosY = ((height - cellHeight) / 2) + cellHeight
+					- ((hIndex - 1) * cellRadius * 2) - cellRadius;
 
 			int iLowerBound = iBound.getLower();
 			int iUpperBound = iBound.getUpper();
@@ -61,7 +61,7 @@ public class BoardGraphic {
 						* 2;
 
 				float cellPosX = ((width - cellWidth) / 2)
-						+ ((iIndex - iLowerBound + 1) * cellRadius * 2)
+						+ ((iIndex - iLowerBound) * cellRadius * 2)
 						+ cellRadius;
 
 				Cell cell = mBoard.getCell(hIndex, iIndex);
@@ -98,6 +98,6 @@ public class BoardGraphic {
 	 * @return
 	 */
 	private float getCellRadius(float boardWidth) {
-		return boardWidth / (11 * 2);
+		return boardWidth / (9 * 2);
 	}
 }

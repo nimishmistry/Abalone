@@ -47,7 +47,7 @@ public class CellGraphic {
 
 		switch (mCell.getState()) {
 		case EMPTY:
-			mPaint.setARGB(255, 0, 0, 0);
+			mPaint.setARGB(128, 0, 0, 0);
 			break;
 		case PLAYER1:
 			mPaint.setARGB(255, 255, 0, 0);
@@ -60,7 +60,8 @@ public class CellGraphic {
 			break;
 		}
 
-		mPaint.setStyle(Paint.Style.STROKE);
+		mPaint.setAntiAlias(true);
+		mPaint.setStyle(Paint.Style.FILL);
 	}
 
 	/**
@@ -70,6 +71,7 @@ public class CellGraphic {
 	 */
 	public void Render(Canvas canvas) {
 		canvas.drawCircle(mPosition.x, mPosition.y, mRadius, mPaint);
-		canvas.drawText(mCell.getHIndex()+"-"+mCell.getIIndex(), mPosition.x, mPosition.y, mPaint);
+		// canvas.drawText(mCell.getHIndex() + "-" + mCell.getIIndex(),
+		// mPosition.x, mPosition.y, mPaint);
 	}
 }
