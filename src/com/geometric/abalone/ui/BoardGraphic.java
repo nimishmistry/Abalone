@@ -32,6 +32,14 @@ public class BoardGraphic {
 	}
 
 	/**
+	 * 
+	 * @return
+	 */
+	public List<CellGraphic> getCellGraphics() {
+		return mCellGraphics;
+	}
+
+	/**
 	 * Renders the board graphic
 	 * 
 	 * @param canvas
