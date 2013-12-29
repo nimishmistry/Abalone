@@ -4,6 +4,7 @@
 package com.geometric.abalone.datamodel;
 
 import java.util.ArrayList;
+import java.util.EventObject;
 import java.util.List;
 
 /**
@@ -12,12 +13,14 @@ import java.util.List;
  */
 public class Board {
 	private List<Cell> mCells;
+	private List<BoardChangedEventListener> mEvemtListeners;
 
 	/**
 	 * 
 	 */
 	public Board() {
 		mCells = new ArrayList<Cell>();
+		mEvemtListeners = new ArrayList<BoardChangedEventListener>();
 	}
 
 	/**
@@ -26,6 +29,15 @@ public class Board {
 	 */
 	void addCell(Cell cell) {
 		mCells.add(cell);
+		cell.setOnChangedListener(new CellChangedEventListener() {
+
+			@Override
+			public void onCellChanged(EventObject e) {
+				for (BoardChangedEventListener listener : mEvemtListeners) {
+					listener.onBoardChanged(new EventObject(this));
+				}
+			}
+		});
 	}
 
 	/**
@@ -49,6 +61,40 @@ public class Board {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * 
+	 * @param cell
+	 * @param direction
+	 * @return
+	 */
+	public Cell getNextCell(Cell cell, Direction direction) {
+		Cell adjCell = null;
+		switch (direction) {
+		case EAST:
+			adjCell = getCell(cell.getHIndex(), cell.getIIndex() + 1);
+			break;
+		case NORTH_EAST:
+			adjCell = getCell(cell.getHIndex() + 1, cell.getIIndex() + 1);
+			break;
+		case NORTH_WEST:
+			adjCell = getCell(cell.getHIndex() + 1, cell.getIIndex());
+			break;
+		case SOUTH_EAST:
+			adjCell = getCell(cell.getHIndex() - 1, cell.getIIndex());
+			break;
+		case SOUTH_WEST:
+			adjCell = getCell(cell.getHIndex() - 1, cell.getIIndex() - 1);
+			break;
+		case WEST:
+			adjCell = getCell(cell.getHIndex(), cell.getIIndex() - 1);
+			break;
+		default:
+			break;
+		}
+
+		return adjCell;
 	}
 
 	/**
@@ -103,5 +149,13 @@ public class Board {
 	 */
 	public Cell getCellAtNW(Cell cell) {
 		return getCell(cell.getHIndex() + 1, cell.getIIndex());
+	}
+
+	/**
+	 * 
+	 * @param listener
+	 */
+	public void setOnChangedListener(BoardChangedEventListener listener) {
+		mEvemtListeners.add(listener);
 	}
 }

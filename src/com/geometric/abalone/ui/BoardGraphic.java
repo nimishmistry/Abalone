@@ -5,11 +5,11 @@ import java.util.List;
 
 import android.graphics.Canvas;
 import android.graphics.PointF;
-import android.graphics.RectF;
-import android.os.IInterface;
-import android.telephony.CellLocation;
 
-import com.geometric.abalone.datamodel.*;
+import com.geometric.abalone.datamodel.Board;
+import com.geometric.abalone.datamodel.BoardBounds;
+import com.geometric.abalone.datamodel.Bound;
+import com.geometric.abalone.datamodel.Cell;
 
 /**
  * Represents a board grpahic
@@ -84,21 +84,7 @@ public class BoardGraphic {
 		}
 	}
 
-	/**
-	 * Gets the board rect
-	 * 
-	 * @param canvas
-	 * @return
-	 */
-	private RectF getBoardRect(Canvas canvas) {
-
-		float width = canvas.getWidth();
-		float height = canvas.getHeight();
-
-		return new RectF(0, (height - width) / 2, width, (height - width) / 2
-				+ width);
-	}
-
+	
 	/**
 	 * Gets the cell radius
 	 * 

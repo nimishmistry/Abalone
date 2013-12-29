@@ -1,12 +1,10 @@
 package com.geometric.abalone.ui;
 
-import android.R.bool;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.PointF;
 
-import com.geometric.abalone.datamodel.*;
+import com.geometric.abalone.datamodel.Cell;
 
 /**
  * 
@@ -86,18 +84,7 @@ public class CellGraphic {
 	 * @param canvas
 	 */
 	public void Render(Canvas canvas) {
-		Path path = new Path();
-		path.moveTo(mPosition.x - mRadius, mPosition.y - mRadius);
-		path.lineTo(mPosition.x + mRadius, mPosition.y - mRadius);
-		path.lineTo(mPosition.x + mRadius, mPosition.y + mRadius);
-		path.lineTo(mPosition.x - mRadius, mPosition.y + mRadius);
-		path.lineTo(mPosition.x - mRadius, mPosition.y - mRadius);
-
-		canvas.drawPath(path, mPaint);
-		canvas.drawPath(path, mPaint1);
-		// canvas.drawCircle(mPosition.x, mPosition.y, mRadius, mPaint);
-		// canvas.drawText(mCell.getHIndex() + "-" + mCell.getIIndex(),
-		// mPosition.x, mPosition.y, mPaint);
+		canvas.drawCircle(mPosition.x, mPosition.y, mRadius, mPaint);
 	}
 
 	/**
@@ -105,13 +92,7 @@ public class CellGraphic {
 	 * @param point
 	 */
 	public Boolean IsPointInCell(PointF point) {
-
-		if (point.x > mPosition.x - mRadius && point.x < mPosition.x + mRadius
-				&& point.y > mPosition.y - mRadius
-				&& point.y < mPosition.y + mRadius) {
-			return true;
-		}
-
-		return false;
+		return Math.sqrt(Math.pow(point.x - mPosition.x, 2)
+				+ Math.pow(point.y - mPosition.y, 2)) < mRadius;
 	}
 }
