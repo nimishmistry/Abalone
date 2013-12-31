@@ -13,6 +13,7 @@ import com.geometric.abalone.algo.Algo;
 import com.geometric.abalone.datamodel.Board;
 import com.geometric.abalone.datamodel.BoardBuilder;
 import com.geometric.abalone.datamodel.BoardChangedEventListener;
+import com.geometric.abalone.datamodel.CellState;
 import com.geometric.abalone.datamodel.Direction;
 
 /**
@@ -89,21 +90,25 @@ public class GameView extends android.view.View {
 					break;
 
 				case MotionEvent.ACTION_MOVE:
-					cell = getCell(new PointF(motionEvent.getX(),
-							motionEvent.getY()));
 
-					if (cell != null && cell != mPrevCellGraphic) {
+					if (mPrevCellGraphic != null) {
+						cell = getCell(new PointF(motionEvent.getX(),
+								motionEvent.getY()));
 
-						mDir = getMotionDirection(mPrevCellGraphic, cell);
+						if (cell != null && cell != mPrevCellGraphic) {
 
-						mCanMove = mAlgo.CanMove(mPrevCellGraphic.getCell(),
-								mDir);
+							mDir = getMotionDirection(mPrevCellGraphic, cell);
+
+							mCanMove = mAlgo.CanMove(
+									mPrevCellGraphic.getCell(), mDir);
+						}
 					}
-
 					break;
 
 				case MotionEvent.ACTION_UP:
-					if (mCanMove) {
+					if (mPrevCellGraphic != null
+							&& mPrevCellGraphic.getCell().getState() != CellState.EMPTY
+							&& mCanMove) {
 						mAlgo.Move(mPrevCellGraphic.getCell(), mDir);
 						mCanMove = false;
 					}

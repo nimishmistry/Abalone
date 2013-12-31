@@ -77,7 +77,7 @@ public class Algo {
 			return false;
 		}
 
-		for (Cell o : cells.subList(0, (cells.size() / 2))) {
+		for (Cell o : cells.subList(0, 1 + (cells.size() / 2))) {
 			if (o.getState() != cell.getState())
 				return false;
 		}
