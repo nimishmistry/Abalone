@@ -1,8 +1,11 @@
 package com.geometric.abalone.ui;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.RadialGradient;
+import android.graphics.Shader;
 
 import com.geometric.abalone.datamodel.Cell;
 
@@ -51,10 +54,16 @@ public class CellGraphic {
 			mPaint.setARGB(128, 0, 0, 0);
 			break;
 		case PLAYER1:
-			mPaint.setARGB(128, 255, 0, 0);
+			// mPaint.setARGB(128, 255, 0, 0);
+			mPaint.setShader(new RadialGradient(mPosition.x, mPosition.y,
+					mRadius, Color.rgb(192, 96, 96), Color.rgb(128, 0, 0),
+					Shader.TileMode.MIRROR));
 			break;
 		case PLAYER2:
-			mPaint.setARGB(128, 0, 255, 0);
+			// mPaint.setARGB(128, 0, 255, 0);
+			mPaint.setShader(new RadialGradient(mPosition.x, mPosition.y,
+					mRadius, Color.rgb(96, 192, 96), Color.rgb(0, 128, 0),
+					Shader.TileMode.MIRROR));
 			break;
 		default:
 			mPaint.setARGB(128, 255, 255, 255);

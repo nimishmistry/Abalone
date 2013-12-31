@@ -2,20 +2,18 @@ package com.geometric.abalone.ui;
 
 import java.util.EventObject;
 
-import com.geometric.abalone.algo.Algo;
-import com.geometric.abalone.datamodel.Board;
-import com.geometric.abalone.datamodel.BoardBuilder;
-import com.geometric.abalone.datamodel.BoardChangedEventListener;
-import com.geometric.abalone.datamodel.CellState;
-import com.geometric.abalone.datamodel.Direction;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.hardware.Camera.PreviewCallback;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.geometric.abalone.algo.Algo;
+import com.geometric.abalone.datamodel.Board;
+import com.geometric.abalone.datamodel.BoardBuilder;
+import com.geometric.abalone.datamodel.BoardChangedEventListener;
+import com.geometric.abalone.datamodel.Direction;
 
 /**
  * 

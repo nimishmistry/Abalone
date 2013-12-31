@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.PointF;
 
 import com.geometric.abalone.datamodel.Board;
 import com.geometric.abalone.datamodel.BoardBounds;
 import com.geometric.abalone.datamodel.Bound;
 import com.geometric.abalone.datamodel.Cell;
+import com.geometric.abalone.datamodel.CellState;
 
 /**
  * Represents a board grpahic
@@ -19,6 +21,8 @@ import com.geometric.abalone.datamodel.Cell;
  */
 public class BoardGraphic {
 	private Board mBoard;
+	private Paint mPaint1;
+	private Paint mPaint2;
 	private List<CellGraphic> mCellGraphics;
 
 	/**
@@ -28,6 +32,19 @@ public class BoardGraphic {
 	 */
 	public BoardGraphic(Board board) {
 		mBoard = board;
+
+		mPaint1 = new Paint();
+		mPaint1.setARGB(255, 255, 0, 0);
+		mPaint1.setAntiAlias(true);
+		mPaint1.setStyle(Paint.Style.STROKE);
+		mPaint1.setTextSize(36);
+
+		mPaint2 = new Paint();
+		mPaint2.setARGB(255, 0, 255, 0);
+		mPaint2.setAntiAlias(true);
+		mPaint2.setStyle(Paint.Style.STROKE);
+		mPaint2.setTextSize(36);
+
 		mCellGraphics = new ArrayList<CellGraphic>();
 	}
 
@@ -78,7 +95,34 @@ public class BoardGraphic {
 
 				mCellGraphics.add(cellGraphic);
 			}
+
+			String msg1 = "Player 1: " + (14 - getScore(CellState.PLAYER2));
+
+			String msg2 = "Player 2: " + (14 - getScore(CellState.PLAYER1));
+
+			canvas.drawText(msg1, 0, height - 36, mPaint1);
+			canvas.drawText(msg2, 0, 36, mPaint2);
 		}
+	}
+
+	/**
+	 * 
+	 * @param state
+	 * @return
+	 */
+	private int getScore(CellState state) {
+
+		int count = 0;
+
+		List<Cell> cells = mBoard.getCells();
+
+		for (int i = 0; i < cells.size(); ++i) {
+			if (cells.get(i).getState() == state) {
+				++count;
+			}
+		}
+
+		return count;
 	}
 
 	/**

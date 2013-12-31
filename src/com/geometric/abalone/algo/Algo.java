@@ -131,11 +131,6 @@ public class Algo {
 				return false;
 		}
 
-		for (Cell o : cells.subList((cells.size() / 2) + 1, cells.size() - 1)) {
-			if (o.getState() != cell.getState())
-				return false;
-		}
-
 		return true;
 	}
 }
