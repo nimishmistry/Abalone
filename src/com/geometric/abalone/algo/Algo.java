@@ -1,6 +1,7 @@
 package com.geometric.abalone.algo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.geometric.abalone.datamodel.Board;
 import com.geometric.abalone.datamodel.Cell;
@@ -58,57 +59,6 @@ public class Algo {
 	 */
 	public Boolean CanMove(Cell cell, Direction direction) {
 
-		// Boolean canMove = false;
-		//
-		// Cell adj1 = mBoard.getNextCell(cell, direction);
-		//
-		// // end of board
-		// if (adj1 == null) {
-		// return false;
-		// }
-		//
-		// if (adj1.getState() == CellState.EMPTY) {// adjacent cell is empty
-		// return true;
-		// } else if (adj1.getState() != cell.getState()) {// adjacent cell is
-		// // occupied by opponent
-		// return false;
-		// }
-		//
-		// // adjacent1 cell belongs to the same player
-		// Cell adj2 = mBoard.getNextCell(adj1, direction);
-		//
-		// // end of board
-		// if (adj2 == null) {
-		// return false;
-		// }
-		//
-		// if (adj2.getState() == CellState.EMPTY) {// adjacent cell is empty
-		// return true;
-		// }
-		//
-		// Cell adj3 = mBoard.getNextCell(adj2, direction);
-		//
-		// if (adj2.getState() != cell.getState()
-		// && (adj3 == null || adj3.getState() == CellState.EMPTY)) {
-		// return true;
-		// }
-		//
-		// // adjacent 2 belongs to the same player
-		// if (adj3 == null) {
-		// return false;
-		// } else if (adj3.getState() == CellState.EMPTY) {
-		// return true;
-		// }
-		//
-		// Cell adj4 = mBoard.getNextCell(adj3, direction);
-		//
-		// if (adj4 == null || adj4.getState() == CellState.EMPTY
-		// || adj4.getState() != cell.getState()) {
-		// return true;
-		// }
-		//
-		// return canMove;
-
 		ArrayList<Cell> cells = new ArrayList<Cell>();
 
 		Cell currentCell = cell;
@@ -121,6 +71,7 @@ public class Algo {
 		int size = cells.size();
 
 		if (size > 5
+				|| getStateCount(cells, cell.getState()) > 3
 				|| (cells.get(size - 1).getState() == cell.getState() && mBoard
 						.getNextCell(cells.get(size - 1), direction) == null)) {
 			return false;
@@ -132,5 +83,21 @@ public class Algo {
 		}
 
 		return true;
+	}
+
+	/**
+	 * 
+	 * @param cells
+	 * @param state
+	 * @return
+	 */
+	private int getStateCount(List<Cell> cells, CellState state) {
+		int count = 0;
+		for (int i = 0; i < cells.size(); ++i) {
+			if (cells.get(i).getState() == state) {
+				++count;
+			}
+		}
+		return count;
 	}
 }

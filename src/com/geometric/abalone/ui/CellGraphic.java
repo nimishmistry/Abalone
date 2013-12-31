@@ -49,24 +49,34 @@ public class CellGraphic {
 
 		mPaint = new Paint();
 
+		int color1, color2, color3, color4 = 0;
+
 		switch (mCell.getState()) {
 		case EMPTY:
 			mPaint.setARGB(128, 0, 0, 0);
 			break;
 		case PLAYER1:
-			// mPaint.setARGB(128, 255, 0, 0);
+			color1 = Color.rgb(255, 0, 0);
+			color2 = Color.rgb(225, 0, 0);
+			color3 = Color.rgb(192, 0, 0);
+			color4 = Color.rgb(160, 0, 0);
+
 			mPaint.setShader(new RadialGradient(mPosition.x, mPosition.y,
-					mRadius, Color.rgb(192, 96, 96), Color.rgb(128, 0, 0),
-					Shader.TileMode.MIRROR));
+					mRadius, new int[] { color1, color2, color3, color4 },
+					null, Shader.TileMode.MIRROR));
 			break;
 		case PLAYER2:
-			// mPaint.setARGB(128, 0, 255, 0);
+			color1 = Color.rgb(0, 255, 0);
+			color2 = Color.rgb(0, 225, 0);
+			color3 = Color.rgb(0, 192, 0);
+			color4 = Color.rgb(0, 160, 0);
+
 			mPaint.setShader(new RadialGradient(mPosition.x, mPosition.y,
-					mRadius, Color.rgb(96, 192, 96), Color.rgb(0, 128, 0),
-					Shader.TileMode.MIRROR));
+					mRadius, new int[] { color1, color2, color3, color4 },
+					null, Shader.TileMode.MIRROR));
 			break;
 		default:
-			mPaint.setARGB(128, 255, 255, 255);
+			mPaint.setARGB(128, 128, 128, 128);
 			break;
 		}
 
