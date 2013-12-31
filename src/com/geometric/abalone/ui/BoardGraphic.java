@@ -48,18 +48,15 @@ public class BoardGraphic {
 		float width = canvas.getWidth();
 		float height = canvas.getHeight();
 		float cellRadius = getCellRadius(width);
+		float cellDist = (float) (Math.sin(Math.toRadians(60)) * cellRadius * 2);
+		float boardHeight = (2 * cellRadius) + (8 * cellDist);
 
 		for (int hIndex = 1; hIndex <= 9; ++hIndex) {
+
+			float cellPosY = ((height - boardHeight) / 2) + boardHeight
+					- ((hIndex - 1) * cellDist) - cellRadius;
+
 			Bound iBound = BoardBounds.getBounds(hIndex);
-
-			float cellHeight = 9 * cellRadius * 2;
-
-			// float cellPosY = ((height - cellHeight) / 2) + cellHeight
-			// - (hIndex * cellRadius * 2) - cellRadius;
-
-			float cellPosY = ((height - cellHeight) / 2) + cellHeight
-					- ((hIndex - 1) * cellRadius * 2) - cellRadius;
-
 			int iLowerBound = iBound.getLower();
 			int iUpperBound = iBound.getUpper();
 
@@ -84,7 +81,6 @@ public class BoardGraphic {
 		}
 	}
 
-	
 	/**
 	 * Gets the cell radius
 	 * 

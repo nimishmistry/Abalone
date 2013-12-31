@@ -107,6 +107,7 @@ public class GameView extends android.view.View {
 				case MotionEvent.ACTION_UP:
 					if (mCanMove) {
 						mAlgo.Move(mPrevCellGraphic.getCell(), mDir);
+						mCanMove = false;
 					}
 					break;
 
