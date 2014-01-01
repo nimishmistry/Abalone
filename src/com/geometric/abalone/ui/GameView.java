@@ -91,7 +91,8 @@ public class GameView extends android.view.View {
 
 				case MotionEvent.ACTION_MOVE:
 
-					if (mPrevCellGraphic != null) {
+					if (mPrevCellGraphic != null
+							&& mPrevCellGraphic.getCell().getState() != CellState.EMPTY) {
 						cell = getCell(new PointF(motionEvent.getX(),
 								motionEvent.getY()));
 
