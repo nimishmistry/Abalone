@@ -21,8 +21,9 @@ import com.geometric.abalone.datamodel.CellState;
  */
 public class BoardGraphic {
 	private Board mBoard;
-	private Paint mPaint1;
-	private Paint mPaint2;
+	private Paint mPlayerScoreBack1;
+	private Paint mPlayerScoreBack2;
+	private Paint mPlayerScoreFore;
 	private List<CellGraphic> mCellGraphics;
 
 	/**
@@ -33,17 +34,21 @@ public class BoardGraphic {
 	public BoardGraphic(Board board) {
 		mBoard = board;
 
-		mPaint1 = new Paint();
-		mPaint1.setARGB(255, 255, 0, 0);
-		mPaint1.setAntiAlias(true);
-		mPaint1.setStyle(Paint.Style.STROKE);
-		mPaint1.setTextSize(36);
+		mPlayerScoreBack1 = new Paint();
+		mPlayerScoreBack1.setARGB(255, 255, 128, 128);
+		mPlayerScoreBack1.setAntiAlias(true);
+		mPlayerScoreBack1.setStyle(Paint.Style.FILL);
 
-		mPaint2 = new Paint();
-		mPaint2.setARGB(255, 0, 255, 0);
-		mPaint2.setAntiAlias(true);
-		mPaint2.setStyle(Paint.Style.STROKE);
-		mPaint2.setTextSize(36);
+		mPlayerScoreBack2 = new Paint();
+		mPlayerScoreBack2.setARGB(255, 128, 255, 128);
+		mPlayerScoreBack2.setAntiAlias(true);
+		mPlayerScoreBack2.setStyle(Paint.Style.FILL);
+
+		mPlayerScoreFore = new Paint();
+		mPlayerScoreFore.setARGB(255, 255, 0, 0);
+		mPlayerScoreFore.setAntiAlias(true);
+		mPlayerScoreFore.setStyle(Paint.Style.STROKE);
+		mPlayerScoreFore.setTextSize(36);
 
 		mCellGraphics = new ArrayList<CellGraphic>();
 	}
@@ -100,8 +105,15 @@ public class BoardGraphic {
 
 			String msg2 = "Player 2: " + (14 - getScore(CellState.PLAYER1));
 
-			canvas.drawText(msg1, 0, height - 36, mPaint1);
-			canvas.drawText(msg2, 0, 36, mPaint2);
+			canvas.drawRect(0, 0, width, 40, mPlayerScoreBack2);
+			canvas.drawRect(0, height - 40, width, height, mPlayerScoreBack1);
+
+			canvas.drawText(msg1,
+					(width - mPlayerScoreBack1.measureText(msg1)) / 2, 2,
+					mPlayerScoreFore);
+			canvas.drawText(msg2,
+					(width - mPlayerScoreBack1.measureText(msg1)) / 2,
+					height - 38, mPlayerScoreFore);
 		}
 	}
 
